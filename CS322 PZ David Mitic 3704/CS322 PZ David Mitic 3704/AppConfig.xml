@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<connectionStrings>
+	<add name="BioskopConnection"
+         connectionString="Server=localhost;Database=BioskopDB;Uid=root;Pwd=yourpassword;"
+         providerName="MySql.Data.MySqlClient"/>
+</connectionStrings>
