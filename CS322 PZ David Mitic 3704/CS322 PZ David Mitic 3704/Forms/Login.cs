@@ -29,7 +29,17 @@ namespace CS322_PZ_David_Mitic_3704.Forms
         {
             Korisnik korisnik = dbHelper.Login(email.Text, pass.Text);
 
-            MessageBox.Show(korisnik != null ? "Uspesno ste se ulogovali!" : "Pogresan email ili lozinka!");
+            if (korisnik != null)
+            {
+                MainForm mainForm = new MainForm(korisnik);
+                mainForm.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show(korisnik != null ? "Uspesno ste se ulogovali!" : "Pogresan email ili lozinka!");
+            }
+
         }
     }
 }

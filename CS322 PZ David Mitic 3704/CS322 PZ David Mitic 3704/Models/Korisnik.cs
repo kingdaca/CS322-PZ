@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CS322_PZ_David_Mitic_3704.Models
 {
-    internal class Korisnik
+    public class Korisnik
     {
         public int KorisnikID { get; set; }
         public string Ime { get; set; }

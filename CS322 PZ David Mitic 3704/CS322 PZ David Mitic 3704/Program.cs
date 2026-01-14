@@ -13,7 +13,7 @@ namespace CS322_PZ_David_Mitic_3704
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Login());
+            Application.Run(new MainForm());
         }
     }
 }

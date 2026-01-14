@@ -41,9 +41,45 @@ namespace CS322_PZ_David_Mitic_3704.DataBase
                         };
                     }
                 }
+
+                conn.Close();
             }
 
             return null;
+        }
+
+        public List<Projekcija> GetProjekcije()
+        {
+            List<Projekcija> projekcije = new List<Projekcija>();
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                string query = @"SELECT p.*, f.Naslov as FilmNaslov, s.Naziv as SalaNaziv
+                               FROM Projekcije p
+                               JOIN Filmovi f ON p.FilmID = f.FilmID
+                               JOIN Sale s ON p.SalaID = s.SalaID
+                               ORDER BY p.DatumVreme";
+
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                conn.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    projekcije.Add(new Projekcija
+                    {
+                        ProjekcijaID = (int)reader["ProjekcijaID"],
+                        FilmID = (int)reader["FilmID"],
+                        SalaID = (int)reader["SalaID"],
+                        DatumVreme = (DateTime)reader["DatumVreme"],
+                        CenaKarte = (decimal)reader["CenaKarte"],
+                        FilmNaslov = reader["FilmNaslov"].ToString(),
+                        SalaNaziv = reader["SalaNaziv"].ToString()
+                    });
+                }
+            }
+
+            return projekcije;
         }
     }
 }
