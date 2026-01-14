@@ -50,11 +50,11 @@ namespace CS322_PZ_David_Mitic_3704.Forms
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
                 // Odredi proporcionalnu širinu svake kolone
-                dataGridView1.Columns[0].FillWeight = 10;  // ID
-                dataGridView1.Columns[1].FillWeight = 35;  // Film
-                dataGridView1.Columns[2].FillWeight = 20;  // Datum i vreme
-                dataGridView1.Columns[3].FillWeight = 20;  // Sala
-                dataGridView1.Columns[4].FillWeight = 25;  // Cena
+                dataGridView1.Columns[0].FillWeight = 20;  // ID
+                dataGridView1.Columns[1].FillWeight = 60;  // Film
+                dataGridView1.Columns[2].FillWeight = 60;  // Datum i vreme
+                dataGridView1.Columns[3].FillWeight = 40;  // Sala
+                dataGridView1.Columns[4].FillWeight = 30;  // Cena
 
                 // Dozvoli scroll ako ima više od 5 redova
                 dataGridView1.ScrollBars = ScrollBars.Vertical;
@@ -91,9 +91,43 @@ namespace CS322_PZ_David_Mitic_3704.Forms
 
 
 
+
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void logoutBtn_Click(object sender, EventArgs e)
+        {
+            trenutniKorisnik = null;
+            this.Hide();
+            Login loginForm = new Login();
+            loginForm.Show();
+        }
+
+        private void reservdBtn_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite projekciju!", "Info",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            int projekcijaID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
+
+            RezervacijeForm rezervacijaForm = new RezervacijeForm(projekcijaID, trenutniKorisnik);
+            if (rezervacijaForm.ShowDialog() == DialogResult.OK)
+            {
+                MessageBox.Show("Uspešno ste rezervisali kartu!", "Uspeh",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

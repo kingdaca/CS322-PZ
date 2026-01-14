@@ -41,5 +41,10 @@ namespace CS322_PZ_David_Mitic_3704.Forms
             }
 
         }
+
+        private void Login_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

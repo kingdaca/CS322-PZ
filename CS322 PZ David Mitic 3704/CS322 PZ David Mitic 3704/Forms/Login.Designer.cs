@@ -35,26 +35,29 @@
             // 
             // email
             // 
-            email.Location = new Point(161, 74);
+            email.Location = new Point(184, 99);
+            email.Margin = new Padding(3, 4, 3, 4);
             email.Name = "email";
             email.PlaceholderText = "Unesite email";
-            email.Size = new Size(168, 23);
+            email.Size = new Size(191, 27);
             email.TabIndex = 0;
             // 
             // pass
             // 
-            pass.Location = new Point(162, 104);
+            pass.Location = new Point(185, 139);
+            pass.Margin = new Padding(3, 4, 3, 4);
             pass.Name = "pass";
             pass.PlaceholderText = "Unesite sifrue";
-            pass.Size = new Size(168, 23);
+            pass.Size = new Size(191, 27);
             pass.TabIndex = 1;
             pass.UseSystemPasswordChar = true;
             // 
             // loginbtn
             // 
-            loginbtn.Location = new Point(188, 142);
+            loginbtn.Location = new Point(215, 189);
+            loginbtn.Margin = new Padding(3, 4, 3, 4);
             loginbtn.Name = "loginbtn";
-            loginbtn.Size = new Size(106, 23);
+            loginbtn.Size = new Size(121, 31);
             loginbtn.TabIndex = 2;
             loginbtn.Text = "Login";
             loginbtn.UseVisualStyleBackColor = true;
@@ -62,14 +65,16 @@
             // 
             // Login
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(493, 230);
+            ClientSize = new Size(563, 307);
             Controls.Add(loginbtn);
             Controls.Add(pass);
             Controls.Add(email);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Login";
             Text = "Login";
+            FormClosing += Login_FormClosing;
             Load += Login_Load;
             ResumeLayout(false);
             PerformLayout();
