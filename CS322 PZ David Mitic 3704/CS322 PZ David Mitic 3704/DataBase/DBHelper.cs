@@ -230,5 +230,106 @@ namespace CS322_PZ_David_Mitic_3704.DataBase
 
             return zauzetaMesta;
         }
+
+        public List<Sala> GetSale()
+        {
+            List<Sala> sale = new List<Sala>();
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM Sale";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                conn.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    sale.Add(new Sala
+                    {
+                        SalaID = Convert.ToInt32(reader["SalaID"]),
+                        Naziv = reader["Naziv"].ToString(),
+                    });
+                }
+            }
+            return sale;
+        }
+
+        public Film GetFilmByNaslov(string naslov)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM Filmovi WHERE Naslov=@Naslov";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Naslov", naslov);
+                conn.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    return new Film
+                    {
+                        FilmID = Convert.ToInt32(reader["FilmID"]),
+                        Naslov = reader["Naslov"].ToString(),
+                        Zanr = reader["Zanr"].ToString(),
+                        Trajanje = Convert.ToInt32(reader["Trajanje"]),
+                        Opis = reader["Opis"].ToString(),
+                        SlikaURL = reader["SlikaURL"]?.ToString()
+                    };
+                }
+            }
+            return null;
+        }
+
+        public Sala GetSalaByNaziv(string naziv)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM Sale WHERE Naziv=@Naziv";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Naziv", naziv);
+                conn.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    return new Sala
+                    {
+                        SalaID = Convert.ToInt32(reader["SalaID"]),
+                        Naziv = reader["Naziv"].ToString(),
+                    };
+                }
+            }
+            return null;
+        }
+
+        public void addProjekcija(Projekcija projekcija)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                string query = @"INSERT INTO Projekcije (FilmID, SalaID, DatumVreme, CenaKarte)
+                             VALUES (@FilmID, @SalaID, @DatumVreme, @CenaKarte);";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@FilmID", projekcija.FilmID);
+                cmd.Parameters.AddWithValue("@SalaID", projekcija.SalaID);
+                cmd.Parameters.AddWithValue("@DatumVreme", projekcija.DatumVreme);
+                cmd.Parameters.AddWithValue("@CenaKarte", projekcija.CenaKarte);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public bool deleteProjekcija(int projekcijaID)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                string query = "DELETE FROM Projekcije WHERE ProjekcijaID=@ProjekcijaID";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ProjekcijaID", projekcijaID);
+                conn.Open();
+                if(cmd.ExecuteNonQuery() > 0)
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            }
+        }
     }
 }
