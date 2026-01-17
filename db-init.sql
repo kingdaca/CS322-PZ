@@ -34,7 +34,7 @@ CREATE TABLE Korisnici (
     KorisnikID INT PRIMARY KEY AUTO_INCREMENT,
     Ime VARCHAR(50) NOT NULL,
     Prezime VARCHAR(50) NOT NULL,
-    Email VARCHAR(100) UNIQUE NOT NULL,
+    Username VARCHAR(100) UNIQUE NOT NULL,
     Lozinka VARCHAR(100) NOT NULL,
     JeAdmin TINYINT(1) DEFAULT 0
 ) ENGINE=InnoDB;
@@ -67,14 +67,14 @@ INSERT INTO Projekcije (FilmID, SalaID, DatumVreme, CenaKarte) VALUES
 (2, 2, '2024-06-15 18:00:00', 600.00),
 (3, 1, '2024-06-16 19:00:00', 500.00);
 
-INSERT INTO Korisnici (Ime, Prezime, Email, Lozinka, JeAdmin) VALUES
-('Admin', 'Admin', 'admin@bioskop.com', 'admin123', 1),
-('Pera', 'Perić', 'pera@email.com', 'pera123', 0);
+INSERT INTO Korisnici (Ime, Prezime, Username, Lozinka, JeAdmin) VALUES
+('Admin', 'Admin', 'admin', 'admin123', 1),
+('Pera', 'Perić', 'pera', 'pera123', 0);
 
 -- 4. Dodatni indeksi za bolju performansu
 CREATE INDEX idx_projekcije_datum ON Projekcije(DatumVreme);
 CREATE INDEX idx_karte_status ON Karte(Status);
-CREATE INDEX idx_korisnici_email ON Korisnici(Email);
+CREATE INDEX idx_korisnici_username ON Korisnici(Username);
 
 -- 5. Stored Procedure za rezervaciju karte (opcionalno)
 DELIMITER $$

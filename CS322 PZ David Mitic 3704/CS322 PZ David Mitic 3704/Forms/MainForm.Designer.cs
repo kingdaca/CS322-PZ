@@ -65,7 +65,7 @@
             logoutBtn.Name = "logoutBtn";
             logoutBtn.Size = new Size(82, 22);
             logoutBtn.TabIndex = 1;
-            logoutBtn.Text = "Logout";
+            logoutBtn.Text = "Odjava";
             logoutBtn.UseVisualStyleBackColor = true;
             logoutBtn.Click += logoutBtn_Click;
             // 

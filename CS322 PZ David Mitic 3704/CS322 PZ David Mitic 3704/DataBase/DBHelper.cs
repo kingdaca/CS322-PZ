@@ -137,15 +137,15 @@ namespace CS322_PZ_David_Mitic_3704.DataBase
         }
 
         // Login
-        public Korisnik Login(string email, string lozinka)
+        public Korisnik Login(string username, string lozinka)
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 string query = @"SELECT * FROM Korisnici 
-                             WHERE Email=@Email AND Lozinka=@Lozinka";
+                             WHERE Username=@Username AND Lozinka=@Lozinka";
 
                 MySqlCommand cmd = new MySqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@Email", email);
+                cmd.Parameters.AddWithValue("@Username", username);
                 cmd.Parameters.AddWithValue("@Lozinka", lozinka);
 
                 conn.Open();
@@ -158,7 +158,7 @@ namespace CS322_PZ_David_Mitic_3704.DataBase
                         KorisnikID = Convert.ToInt32(reader["KorisnikID"]),
                         Ime = reader["Ime"].ToString(),
                         Prezime = reader["Prezime"].ToString(),
-                        Email = reader["Email"].ToString(),
+                        Username = reader["Username"].ToString(),
                         JeAdmin = Convert.ToBoolean(reader["JeAdmin"])
                     };
                 }

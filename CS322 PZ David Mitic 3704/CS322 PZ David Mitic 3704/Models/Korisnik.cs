@@ -9,13 +9,13 @@ namespace CS322_PZ_David_Mitic_3704.Models
         public int KorisnikID { get; set; }
         public string Ime { get; set; }
         public string Prezime { get; set; }
-        public string Email { get; set; }
+        public string Username { get; set; }
         public string Lozinka { get; set; }
         public bool JeAdmin { get; set; }
 
         public override string ToString()
         {
-            return $"{Ime} {Prezime} ({Email}) - Admin: {JeAdmin}";
+            return $"{Ime} {Prezime} ({Username}) - Admin: {JeAdmin}";
         }
     }
 }

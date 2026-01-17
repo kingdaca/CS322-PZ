@@ -100,14 +100,14 @@ namespace CS322_PZ_David_Mitic_3704.Forms
 
         private void reservdBtn_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count == 0)
+            if (dataGridView1.SelectedCells.Count == 0)
             {
                 MessageBox.Show("Izaberite projekciju!", "Info",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            int projekcijaID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
+            int projekcijaID = (int)dataGridView1.SelectedCells[0].OwningRow.Cells[0].Value;
 
             RezervacijeForm rezervacijaForm = new RezervacijeForm(projekcijaID, trenutniKorisnik);
             if (rezervacijaForm.ShowDialog() == DialogResult.OK)
@@ -158,14 +158,14 @@ namespace CS322_PZ_David_Mitic_3704.Forms
 
         private void ObrisiBtn_Click(object sender, EventArgs e)
         {
-            if(dataGridView1.SelectedRows.Count == 0)
+            if(dataGridView1.SelectedCells.Count == 0)
             {
                 MessageBox.Show("Izaberite projekciju za brisanje!", "Info",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             } else
             {
-                int projekcijaID = (int)dataGridView1.SelectedRows[0].Cells[0].Value;
+                int projekcijaID = (int)dataGridView1.SelectedCells[0].OwningRow.Cells[0].Value;
                 var confirmResult = MessageBox.Show("Da li ste sigurni da želite da obrišete ovu projekciju?", 
                     "Potvrda brisanja", 
                     MessageBoxButtons.YesNo, 
