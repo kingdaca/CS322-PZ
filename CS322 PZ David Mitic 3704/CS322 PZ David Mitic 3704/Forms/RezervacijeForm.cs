@@ -18,6 +18,7 @@ namespace CS322_PZ_David_Mitic_3704.Forms
         private DBHelper dbHelper;
         private List<Button> sedistaButtons;
         private List<Tuple<int, int>> izabranaSedista;
+        private Sala sala;
 
         public RezervacijeForm()
         {
@@ -31,6 +32,7 @@ namespace CS322_PZ_David_Mitic_3704.Forms
             dbHelper = new DBHelper();
             sedistaButtons = new List<Button>();
             izabranaSedista = new List<Tuple<int, int>>();
+            this.sala = dbHelper.GetSalaByProjekcijaID(projekcijaID);
 
             InitSala();
             LoadZauzetaSedista();
@@ -46,17 +48,26 @@ namespace CS322_PZ_David_Mitic_3704.Forms
             flpSala.Controls.Clear();
             sedistaButtons.Clear();
 
-            // Sala ima 10 redova x 10 kolona
-            for (int red = 1; red <= 10; red++)
+            int buttonWidth = 42;
+            int margin = 2;
+
+            // širina = (širina dugmeta + lijeva + desna margina) * broj kolona
+            flpSala.Width = sala.Kolone * (buttonWidth + margin * 4);
+
+            // opciono: spriječi automatsko lomljenje reda
+            flpSala.WrapContents = true;
+            flpSala.AutoScroll = true;
+
+            for (int red = 1; red <= sala.Redovi; red++)
             {
-                for (int kolona = 1; kolona <= 10; kolona++)
+                for (int kolona = 1; kolona <= sala.Kolone; kolona++)
                 {
                     Button btnSediste = new Button
                     {
                         Text = $"{red}-{kolona}",
                         Tag = new Tuple<int, int>(red, kolona),
-                        Size = new Size(42, 42),
-                        Margin = new Padding(2),
+                        Size = new Size(buttonWidth, 42),
+                        Margin = new Padding(margin),
                         BackColor = Color.LightGray,
                         Font = new Font("Arial", 8)
                     };
@@ -67,6 +78,7 @@ namespace CS322_PZ_David_Mitic_3704.Forms
                 }
             }
         }
+
 
         private void LoadZauzetaSedista()
         {

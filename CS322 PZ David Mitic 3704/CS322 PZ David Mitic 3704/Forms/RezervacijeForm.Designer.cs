@@ -31,55 +31,46 @@
             flpSala = new FlowLayoutPanel();
             lblIzabranaSedista = new Label();
             button1 = new Button();
-            button2 = new Button();
             SuspendLayout();
             // 
             // flpSala
             // 
             flpSala.AutoScroll = true;
-            flpSala.Location = new Point(226, 63);
+            flpSala.Location = new Point(198, 47);
+            flpSala.Margin = new Padding(3, 2, 3, 2);
             flpSala.Name = "flpSala";
-            flpSala.Size = new Size(487, 375);
+            flpSala.Size = new Size(372, 281);
             flpSala.TabIndex = 0;
             // 
             // lblIzabranaSedista
             // 
             lblIzabranaSedista.AutoSize = true;
-            lblIzabranaSedista.Location = new Point(226, 21);
+            lblIzabranaSedista.Location = new Point(198, 16);
             lblIzabranaSedista.Name = "lblIzabranaSedista";
-            lblIzabranaSedista.Size = new Size(124, 20);
+            lblIzabranaSedista.Size = new Size(96, 15);
             lblIzabranaSedista.TabIndex = 0;
             lblIzabranaSedista.Text = "Izaberite sedišta :";
             // 
             // button1
             // 
-            button1.Location = new Point(226, 471);
+            button1.Location = new Point(198, 353);
+            button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
-            button1.Size = new Size(94, 29);
+            button1.Size = new Size(82, 22);
             button1.TabIndex = 1;
             button1.Text = "Rezervisi";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // button2
-            // 
-            button2.Location = new Point(619, 471);
-            button2.Name = "button2";
-            button2.Size = new Size(94, 29);
-            button2.TabIndex = 2;
-            button2.Text = "Odustani";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
-            // 
             // RezervacijeForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(958, 552);
-            Controls.Add(button2);
+            ClientSize = new Size(838, 414);
             Controls.Add(button1);
             Controls.Add(lblIzabranaSedista);
             Controls.Add(flpSala);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "RezervacijeForm";
             Text = "RezervacijeForm";
             Load += RezervacijeForm_Load;
@@ -92,6 +83,5 @@
         private FlowLayoutPanel flpSala;
         private Label lblIzabranaSedista;
         private Button button1;
-        private Button button2;
     }
 }

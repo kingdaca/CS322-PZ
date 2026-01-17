@@ -331,5 +331,31 @@ namespace CS322_PZ_David_Mitic_3704.DataBase
                 }
             }
         }
+
+        public Sala GetSalaByProjekcijaID(int projekcijaID)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                string query = @"SELECT * FROM Sale s
+                             JOIN Projekcije p ON s.SalaID = p.SalaID
+                             WHERE p.ProjekcijaID=@ProjekcijaID";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ProjekcijaID", projekcijaID);
+                conn.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+            
+                    return new Sala
+                    {
+                        SalaID = Convert.ToInt32(reader["SalaID"]),
+                        Naziv = reader["Naziv"].ToString(),
+                        Redovi = Convert.ToInt32(reader["Redovi"]),
+                        Kolone = Convert.ToInt32(reader["Kolone"])
+                    };
+                }
+            }
+            return null;
+        }
     }
 }
