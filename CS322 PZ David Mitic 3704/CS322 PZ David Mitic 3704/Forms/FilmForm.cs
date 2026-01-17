@@ -147,21 +147,54 @@ namespace CS322_PZ_David_Mitic_3704.Forms
                 dBHelper.AddFilm(newFilm);
             }
 
-            filmoviDataGridView.DataSource = null; 
+            filmoviDataGridView.DataSource = null;
             filmoviDataGridView.Refresh();
             loadFilmovi();
         }
 
         private void trajanjeTextBox_TextChanged(object sender, EventArgs e)
         {
-            if(trajanjeTextBox.TextLength > 0)
+            if (trajanjeTextBox.TextLength > 0)
             {
-                if(!int.TryParse(trajanjeTextBox.Text, out _))
+                if (!int.TryParse(trajanjeTextBox.Text, out _))
                 {
                     MessageBox.Show("Molimo unesite validan broj za trajanje filma.", "Nevalidan unos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     trajanjeTextBox.Clear();
                 }
             }
+        }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            if (filmoviDataGridView.SelectedCells[0].OwningRow.Cells[0].Value == null)
+            {
+                MessageBox.Show("Izaberite film za brisanje!", "Info",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            else
+            {
+                int filmID = (int)filmoviDataGridView.SelectedCells[0]
+                                .OwningRow.Cells[0].Value;
+
+                DialogResult result = MessageBox.Show(
+                    "Brisanjem filma brišu se i sve njegove projekcije i rezervacije. Da li ste sigurni da želite da obrišete film?",
+                    "Potvrda brisanja",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+                if (result == DialogResult.No)
+                {
+                    return;
+                }
+
+                dBHelper.DeleteFilm(filmID);
+                filmoviDataGridView.DataSource = null;
+                filmoviDataGridView.Refresh();
+                loadFilmovi();
+            }
+
         }
     }
 }

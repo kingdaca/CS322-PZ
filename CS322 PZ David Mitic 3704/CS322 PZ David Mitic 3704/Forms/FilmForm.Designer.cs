@@ -35,6 +35,7 @@
             opisTextBox = new TextBox();
             urlTxtBox = new TextBox();
             addOrUpdateBtn = new Button();
+            deleteBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)filmoviDataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -101,11 +102,22 @@
             addOrUpdateBtn.UseVisualStyleBackColor = true;
             addOrUpdateBtn.Click += addOrUpdateBtn_Click;
             // 
+            // deleteBtn
+            // 
+            deleteBtn.Location = new Point(580, 451);
+            deleteBtn.Name = "deleteBtn";
+            deleteBtn.Size = new Size(75, 23);
+            deleteBtn.TabIndex = 7;
+            deleteBtn.Text = "Obrisi";
+            deleteBtn.UseVisualStyleBackColor = true;
+            deleteBtn.Click += deleteBtn_Click;
+            // 
             // FilmForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(682, 492);
+            Controls.Add(deleteBtn);
             Controls.Add(addOrUpdateBtn);
             Controls.Add(urlTxtBox);
             Controls.Add(opisTextBox);
@@ -130,5 +142,6 @@
         private TextBox opisTextBox;
         private TextBox urlTxtBox;
         private Button addOrUpdateBtn;
+        private Button deleteBtn;
     }
 }
